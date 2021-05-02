@@ -53,8 +53,9 @@ void getElements() {
 
 void setup() {
     lcd.begin(16, 2);
+    lcd.clear();
     lcd.print("Add(A) Sub(B)");
-    lcd.setCursor(0, 2);
+    lcd.setCursor(0, 1);
     lcd.print("Mul(C) Div(D)");
 }
 
@@ -85,5 +86,10 @@ void loop() {
         lcd.print(first.toFloat() / second.toFloat());
         first = "";
         second = "";
+    } else if (key == '*') {
+        lcd.clear();
+        lcd.print("Add(A) Sub(B)");
+        lcd.setCursor(0, 1);
+        lcd.print("Mul(C) Div(D)");
     }
 }
