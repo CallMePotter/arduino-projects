@@ -41,8 +41,8 @@ void loop() {
 
 void serialEvent() {
     serialData = Serial.readString();
-    x = map(parseDataX(serialData), 0, 1920, 0, 180);
-    y = map(parseDataY(serialData), 0, 1080, 0, 180);
+    x = parseDataX(serialData);
+    y = parseDataY(serialData);
 
     black.write(180 - x);
     blue.write(180 - y);
