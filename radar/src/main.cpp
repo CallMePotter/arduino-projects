@@ -56,12 +56,14 @@ void loop() {
     if (!manual) {
         for (int i = 0; i < stepsPerRevolution / 2; i++) {
             stepper.step(1);
+            rotation = true;
 
             getUltrasonicData(ultrasonic1, ultrasonic2, rotation);
         }
 
         for (int i = 0; i < stepsPerRevolution / 2; i++) {
             stepper.step(-1);
+            rotation = false;
 
             getUltrasonicData(ultrasonic1, ultrasonic2, rotation);
         }
