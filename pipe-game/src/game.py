@@ -75,7 +75,7 @@ def main():
     clock = pygame.time.Clock()
     last_time = 2000
 
-    screen = pygame.display.set_mode((HEIGHT, WIDTH))
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
     serial_data = serial.Serial("/dev/ttyUSB0", 9600)
 
     running = True
