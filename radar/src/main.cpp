@@ -7,18 +7,28 @@
 #define ECHO_PIN 3
 
 unsigned long previousTime;
+unsigned int servoSpeed = 10;
+
 bool taskComplete = false;
 int count = 0;
-int servoSpeed = 10;
 
 Ultrasonic ultrasonic(TRIG_PIN, ECHO_PIN, 40000UL);
 Servo servo;
 
+void sendSerialData(Ultrasonic ultrasonic, int count) {
+    Serial.print(ultrasonic.read());
+    Serial.print(" ");
+    Serial.println(count);
+}
+
 void setup() {
     servo.attach(SERVO_PIN);
+    servo.write(0);
     previousTime = millis();
 
     Serial.begin(9600);
+
+    delay(1000);
 }
 
 void loop() {
@@ -28,7 +38,7 @@ void loop() {
             previousTime = millis();
             count++;
 
-            Serial.println(ultrasonic.read());
+            sendSerialData(ultrasonic, count);
         }
     }
 
@@ -38,7 +48,7 @@ void loop() {
             previousTime = millis();
             count--;
 
-            Serial.println(ultrasonic.read());
+            sendSerialData(ultrasonic, count);
         }
     }
 }
