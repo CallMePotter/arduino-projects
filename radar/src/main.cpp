@@ -10,15 +10,15 @@ unsigned long previousTime;
 unsigned int servoSpeed = 10;
 
 bool taskComplete = false;
-int count = 0;
+int angle = 0;
 
 Ultrasonic ultrasonic(TRIG_PIN, ECHO_PIN, 40000UL);
 Servo servo;
 
-void sendSerialData(Ultrasonic ultrasonic, int count) {
-    Serial.print(ultrasonic.read());
-    Serial.print(" ");
-    Serial.println(count);
+void sendSerialData(int angle, Ultrasonic ultrasonic) {
+    Serial.print(angle);
+    Serial.print(",");
+    Serial.println(ultrasonic.read());
 }
 
 void setup() {
@@ -32,23 +32,23 @@ void setup() {
 }
 
 void loop() {
-    while (count < 180) {
+    while (angle < 180) {
         if (millis() - previousTime > servoSpeed) {
-            servo.write(count);
+            servo.write(angle);
             previousTime = millis();
-            count++;
+            angle++;
 
-            sendSerialData(ultrasonic, count);
+            sendSerialData(angle, ultrasonic);
         }
     }
 
-    while (count > 0) {
+    while (angle > 0) {
         if (millis() - previousTime > servoSpeed) {
-            servo.write(count);
+            servo.write(angle);
             previousTime = millis();
-            count--;
+            angle--;
 
-            sendSerialData(ultrasonic, count);
+            sendSerialData(angle, ultrasonic);
         }
     }
 }
